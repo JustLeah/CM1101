@@ -1,8 +1,16 @@
 from items import *
 from map import rooms
 
-inventory = [item_id, item_laptop, item_money]
-current_mass = 2310
+inventory = []
+equipped = {}
+equipped = {
+	"head": "none", 
+	"chest": "none", 
+	"shield": "none", 
+	"weapon": "none"
+}
+
+current_mass = 0
 
 # Start game at the reception
-current_room = rooms["Reception"]
+current_room = rooms["Dark Cabin"]

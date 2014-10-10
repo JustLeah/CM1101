@@ -1,73 +1,53 @@
-item_id = {
-    "id": "id",
+item_rusty_sword = {
+    "id": "rusty sword",
 
-    "name": "id card",
+    "name": "Rusty Sword",
 
-    "mass": "10",
+    "mass": 10,
+
+    "equipable" : True,
+
+    "slot" : "weapon",
 
     "description":
     """You new shiny student ID card. Expires 1 June 2017.
 You wonder why they have printed a suicide hotline number on it?..."""
 }
 
-item_laptop = {
-    "id": "laptop",
+item_rusty_axe = {
+    "id": "rusty axe",
 
-    "name": "laptop",
+    "name": "Rusty Axe",
 
-    "mass": "2000",
+    "mass": 10,
+
+    "equipable" : True,
+
+    "slot" : "weapon",
+
+    "description":
+    """This axe is rusty and hits like a wet noodle."""
+}
+
+item_wooden_shield = {
+    "id": "wooden shield",
+
+    "name": "Wooden Shield",
+
+    "mass": 2000,
+
+    "equipable" : True,
+    
+    "slot" : "shield",
 
     "description":
     "It has seen better days. At least it has a WiFi card!"
 }
 
-item_money = {
-    "id": "money",
-
-    "mass": "300",
-
-    "name": "money",
-
-    "description":
-    "This wad of cash is barely enough to pay your tuition fees."
-}
-
-item_biscuits = {
-    "id": "biscuits",
-
-    "mass": "500",
-
-    "name": "a pack of biscuits",
-
-    "description": "A pack of biscuits."
-}
-
-item_pen = {
-    "id": "pen",
-
-    "mass": "150",
-    
-    "name": "a pen",
-
-    "description": "A basic ballpoint pen."
-}
-
-item_handbook = {
-    "id": "handbook",
-
-    "mass": "2500",
-    
-    "name": "a student handbook",
-
-    "description": "This student handbook explains everything. Seriously."
-}
 
 #Adding a dictionary for all the items 
 all_items = {
-    "id": item_id,
-    "laptop": item_laptop,
-    "money": item_money,
-    "biscuits": item_biscuits,
-    "pen": item_pen,
-    "handbook": item_handbook
+    "rusty sword": item_rusty_sword,
+    "rusty axe": item_rusty_axe,
+    "wooden shield": item_wooden_shield
 }

@@ -245,6 +245,7 @@ def execute_go(direction):
     moving). Otherwise, it prints "You cannot go there."
     """ 
     global current_room
+    direction = ' '.join(direction)
     if is_valid_exit(current_room['exits'], direction):
         current_room = rooms[current_room['exits'][direction]]
     else:
@@ -257,18 +258,21 @@ def execute_take(item_id):
     there is no such item in the room, this function prints
     "You cannot take that."
     """
+    #Turn the list to a string if more then one word
+    item_id = ' '.join(item_id)
     global current_mass
     #Check to see if the item is in that room
-    if all_items[item_id] in current_room['items']:
-        if (current_mass + int(all_items[item_id]['mass'])) <= 3000:
-            #remove the item from the room it is in
-            current_room['items'].remove(all_items[item_id])
-            #add the item to the player inventory
-            inventory.append(all_items[item_id])
-            #add the mass to the current mass
-            current_mass = int(current_mass) + int(all_items[item_id]['mass'])
-        else:
-            print("You need to drop some items before you can do this!")      
+    if item_id in all_items:
+        if all_items[item_id] in current_room['items']:
+            if (current_mass + int(all_items[item_id]['mass'])) <= 3000:
+                #remove the item from the room it is in
+                current_room['items'].remove(all_items[item_id])
+                #add the item to the player inventory
+                inventory.append(all_items[item_id])
+                #add the mass to the current mass
+                current_mass = int(current_mass) + int(all_items[item_id]['mass'])
+            else:
+                print("You need to drop some items before you can do this!")      
     else:
         print("You cannot take that!")
 
@@ -277,15 +281,17 @@ def execute_drop(item_id):
     player's inventory to list of items in the current room. However, if there is
     no such item in the inventory, this function prints "You cannot drop that."
     """
+    item_id = ' '.join(item_id)
     global current_mass
     #Check to see if the item is in the inventory
-    if all_items[item_id] in inventory:
-        #remove the item from the inventory
-        inventory.remove(all_items[item_id])
-        #add the item to the room the player is in
-        current_room['items'].append(all_items[item_id])
-        #remove the item mass from the current mass
-        current_mass = current_mass - int(all_items[item_id]['mass'])
+    if item_id in all_items:    
+        if all_items[item_id] in inventory:
+            #remove the item from the inventory
+            inventory.remove(all_items[item_id])
+            #add the item to the room the player is in
+            current_room['items'].append(all_items[item_id])
+            #remove the item mass from the current mass
+            current_mass = current_mass - int(all_items[item_id]['mass'])
     else:
         print("You do not have that!")
 
@@ -299,6 +305,55 @@ def execute_mass():
         print(name + " has a mass of " + mass + "g!")
     print("Your current total mass is %sg!" % current_mass)
 
+def equip_item(item_id):
+    """This function will equip the item and give the player the benifical stats
+    as well as moving it from inventory to equiped items
+    """  
+    #Turn the list to a string if more then one word
+    item_id = ' '.join(item_id)
+    #Check to see if the item exists
+    if item_id in all_items:
+        if all_items[item_id] in inventory and all_items[item_id]['equipable'] == True:
+            #Check that slot is empty          
+            if equipped[all_items[item_id]['slot']] == "none":
+                #remove the item from the inventory
+                inventory.remove(all_items[item_id])
+                #add the item to the player equiped items
+                equipped[all_items[item_id]['slot']] = all_items[item_id]
+            else:
+                print("Please unequip this slot first!")
+        else:
+            print("You cannot equip this item!")      
+    else:
+        print("You do not have this item!")
+
+def unequip_item(item_id):
+    """This function will unequip the item removing the benifical stats
+    as well as moving it from equiped items to the inventory
+    """  
+    #Turn the list to a string if more then one word
+    item_id = ' '.join(item_id)
+    #Check to see if the item is equipped
+    for e in equipped:
+        if equipped[all_items[item_id]['slot']] == all_items[item_id]:
+            #remove the item from the inventory
+            equipped[all_items[item_id]['slot']] = "none"
+            #add the item to the player equiped items
+            inventory.append(all_items[item_id])
+        else:
+            print("This item is not equipped")      
+    else:
+        print("You do not have this item!")
+
+def equipped_items():
+    """This function will show you all of your equipped items as well
+    as any empty slots you have
+    """  
+    for e in equipped:
+        if equipped[e] == "none":
+            print("You have no "+e+" equipped.")
+        else:
+            print("You have a "+str(equipped[e]['name'])+ " equipped!")
 
 def execute_command(command):
     """This function takes a command (a list of words as returned by
@@ -309,25 +364,41 @@ def execute_command(command):
     """
     if command[0] == "go":
         if len(command) > 1:
-            execute_go(command[1])
+            execute_go(command[1:])
         else:
             print("Go where?")
 
     elif command[0] == "take":
         if len(command) > 1:
-            execute_take(command[1])
+            execute_take(command[1:])
         else:
             print("Take what?")
 
+    elif command[0] == "equip":
+        if len(command) > 1:
+            equip_item(command[1:])
+        else:
+            print("Equip what?")
+
+    elif command[0] == "unequip":
+        if len(command) > 1:
+            unequip_item(command[1:])
+        else:
+            print("Unequip what?")
+
     elif command[0] == "drop":
         if len(command) > 1:
-            execute_drop(command[1])
+            execute_drop(command[1:])
         else:
             print("Drop what?")
 
     elif command[0] == "mass":
         if len(command) == 1:
             execute_mass()
+
+    elif command[0] == "equipped":
+        if len(command) == 1:
+            equipped_items()
 
     else:
         print("This makes no sense.")

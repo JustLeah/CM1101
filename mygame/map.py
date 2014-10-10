@@ -1,81 +1,56 @@
 from items import *
 
-room_reception = {
-    "name": "Reception",
+room_dark_cabin = {
+    "name": "Dark Cabin",
 
     "description":
-    """You are in a maze of twisty little passages, all alike.
-Next to you is the School of Computer Science and
-Informatics reception. The receptionist, Matt Strangis,
-seems to be playing an old school text-based adventure
-game on his computer. There are corridors leading to the
-south and east. The exit is to the west.""",
+    """An old and run down cabin, it looks like somewhere that King Kirill would 
+send his slaves.""",
 
-    "exits": {"south": "Robs", "east": "Tutor", "west": "Parking"},
+    "exits": {"south": "Damp Tunnel", "east": "Open Fields"},
 
-    "items": [item_biscuits, item_handbook]
+    "items": [item_rusty_sword, item_rusty_axe]
 }
 
-room_robs = {
-    "name": "Robs' room",
+room_open_fields = {
+    "name": "Open Fields",
 
     "description":
-    """You are leaning agains the door of the systems managers'
-room. Inside you notice Rob Evans and Rob Davies. They
-ignore you. To the north is the reception.""",
+    """These fields spread as far as the eye can see. It's a shame
+that it's due to being short sighted and a lack of glasses""",
 
-    "exits":  {"north": "Reception"},
+    "exits": {"south": "Dark Forest", "west": "Dark Cabin"},
+
+    "items": [item_wooden_shield]
+}
+
+room_damp_tunnel = {
+    "name": "Damp Tunnel",
+
+    "description":
+    """This tunnel smells disguisting, nearly as bad as a lecture hall
+filled with sweaty computer science students""",
+
+    "exits": {"north": "Dark Cabin", "east": "Dark Forest"},
 
     "items": []
 }
 
-room_tutor = {
-    "name": "your personal tutor's office",
+room_dark_forest = {
+    "name": "Dark Forest",
 
     "description":
-    """You are in your personal tutor's office. He intently
-stares at his huge monitor, ignoring you completely.
-On the desk you notice a cup of coffee and an empty
-pack of biscuits. The reception is to the west.""",
+    """This forest is dark, dark enough to not have to worry about 
+    hiding someones body. Ever.""",
 
-    "exits": {"west": "Reception"},
+    "exits": {"north": "Open Fields", "west": "Damp Tunnel"},
 
     "items": []
 }
-
-room_parking = {
-    "name": "the parking lot",
-
-    "description":
-    """You are standing in the Queen's Buildings parking lot.
-You can go south to the COMSC reception, or east to the
-general office.""",
-
-    "exits": {"east": "Office", "south": "Reception"},
-
-    "items": []
-}
-
-room_office = {
-    "name": "the general office",
-
-    "description":
-    """You are standing next to the cashier's till at
-30-36 Newport Road. The cashier looks at you with hope
-in their eyes. If you go west you can return to the
-Queen's Buildings.""",
-
-    "exits": {"west": "Parking"},
-
-    "items": [item_pen]
-}
-
-
 
 rooms = {
-    "Reception": room_reception,
-    "Robs": room_robs,
-    "Tutor": room_tutor,
-    "Parking": room_parking,
-    "Office": room_office
+    "Dark Cabin": room_dark_cabin,
+    "Open Fields": room_open_fields,
+    "Damp Tunnel": room_damp_tunnel,
+    "Dark Forest": room_dark_forest
 }
