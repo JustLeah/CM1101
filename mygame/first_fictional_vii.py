@@ -206,15 +206,12 @@ def print_menu(exits, room_items, inv_items):
     for item in room_items:
         name = str(item['id']).upper()
         desc = str(item['name']).lower()
-        #Get an error with the line below, not too sure why!
-        #print("TAKE %s to take %s.") % (name, desc)
-        #This line below seems to work fine instead! MADNESS!
-        print("TAKE " + name + " to take " + desc + ".")
+        print("TAKE %s to take %s." % (name, desc))
     #Output each item in your inventory
     for item in inv_items:
         name = str(item['id']).upper()
         desc = str(item['name']).lower()
-        print("DROP " + name + " to drop " + desc + ".")
+        print("DROP %s to drop %s." % (name, desc))
     print("MASS to see your current mass and the mass of each item.")
     print("What do you want to do?")
 
@@ -264,15 +261,10 @@ def execute_take(item_id):
     #Check to see if the item is in that room
     if item_id in all_items:
         if all_items[item_id] in current_room['items']:
-            if (current_mass + int(all_items[item_id]['mass'])) <= 3000:
-                #remove the item from the room it is in
-                current_room['items'].remove(all_items[item_id])
-                #add the item to the player inventory
-                inventory.append(all_items[item_id])
-                #add the mass to the current mass
-                current_mass = int(current_mass) + int(all_items[item_id]['mass'])
-            else:
-                print("You need to drop some items before you can do this!")      
+            #remove the item from the room it is in
+            current_room['items'].remove(all_items[item_id])
+            #add the item to the player inventory
+            inventory.append(all_items[item_id])    
     else:
         print("You cannot take that!")
 
@@ -290,20 +282,8 @@ def execute_drop(item_id):
             inventory.remove(all_items[item_id])
             #add the item to the room the player is in
             current_room['items'].append(all_items[item_id])
-            #remove the item mass from the current mass
-            current_mass = current_mass - int(all_items[item_id]['mass'])
     else:
         print("You do not have that!")
-
-def execute_mass():
-    """This function will give the user the mass of each of the items as well as thier
-    current total mass
-    """  
-    for i in inventory:
-        name = str(i['id']).upper()
-        mass = str(i['mass'])
-        print(name + " has a mass of " + mass + "g!")
-    print("Your current total mass is %sg!" % current_mass)
 
 def equip_item(item_id):
     """This function will equip the item and give the player the benifical stats
@@ -353,7 +333,13 @@ def equipped_items():
         if equipped[e] == "none":
             print("You have no "+e+" equipped.")
         else:
-            print("You have a "+str(equipped[e]['name'])+ " equipped!")
+            print("You have a %s equipped!" % str(equipped[e]['name']))
+
+def show_stats():
+    """This function will show you your current stat values
+    """  
+    for s in stats:
+        print("Your current %s is %i." % (s, stats[s]))
 
 def execute_command(command):
     """This function takes a command (a list of words as returned by
@@ -392,13 +378,13 @@ def execute_command(command):
         else:
             print("Drop what?")
 
-    elif command[0] == "mass":
-        if len(command) == 1:
-            execute_mass()
-
     elif command[0] == "equipped":
         if len(command) == 1:
             equipped_items()
+
+    elif command[0] == "stats":
+        if len(command) == 1:
+            show_stats()
 
     else:
         print("This makes no sense.")

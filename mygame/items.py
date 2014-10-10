@@ -1,45 +1,30 @@
+#Item stats are in this order ARMOR, ATTACK, HEALTH
 item_rusty_sword = {
     "id": "rusty sword",
-
     "name": "Rusty Sword",
-
-    "mass": 10,
-
     "equipable" : True,
-
+    "stats": [0, 2, 0],  
     "slot" : "weapon",
-
     "description":
-    """You new shiny student ID card. Expires 1 June 2017.
-You wonder why they have printed a suicide hotline number on it?..."""
+    """This rusty sword would struggle to cut through cheese, even warm cheese"""
 }
 
 item_rusty_axe = {
     "id": "rusty axe",
-
     "name": "Rusty Axe",
-
-    "mass": 10,
-
     "equipable" : True,
-
+    "stats": [0, 2, 0],  
     "slot" : "weapon",
-
     "description":
     """This axe is rusty and hits like a wet noodle."""
 }
 
 item_wooden_shield = {
     "id": "wooden shield",
-
     "name": "Wooden Shield",
-
-    "mass": 2000,
-
     "equipable" : True,
-    
+    "stats": [2, 0, 0],  
     "slot" : "shield",
-
     "description":
     "It has seen better days. At least it has a WiFi card!"
 }
