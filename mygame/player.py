@@ -10,8 +10,8 @@ equipped = {
 
 stats = {
 	"health": 10,
-	"attack": 0,
-	"armor": 0
+	"attack": 1,
+	"defense": 1
 }
 
 #Start game at the reception

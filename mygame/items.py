@@ -1,32 +1,35 @@
-#Item stats are in this order ARMOR, ATTACK, HEALTH
+#Item stats are in this order HEALTH, ATTACK, DEFENSE
 item_rusty_sword = {
     "id": "rusty sword",
-    "name": "Rusty Sword",
+    "name": "a Rusty Sword",
     "equipable" : True,
-    "stats": [0, 2, 0],  
+    "stats": [0, 1, 0],  
     "slot" : "weapon",
     "description":
-    """This rusty sword would struggle to cut through cheese, even warm cheese"""
+    """This rusty sword would struggle to cut through cheese, even warm cheese. 
+It gives me +1 ATTACK!"""
 }
 
 item_rusty_axe = {
     "id": "rusty axe",
-    "name": "Rusty Axe",
+    "name": "a Rusty Axe",
     "equipable" : True,
-    "stats": [0, 2, 0],  
+    "stats": [0, 1, 0],  
     "slot" : "weapon",
     "description":
-    """This axe is rusty and hits like a wet noodle."""
+    """This axe is rusty and hits like a wet noodle. 
+It gives me +1 ATTACK!"""
 }
 
 item_wooden_shield = {
     "id": "wooden shield",
     "name": "Wooden Shield",
     "equipable" : True,
-    "stats": [2, 0, 0],  
+    "stats": [0, 0, 1],  
     "slot" : "shield",
     "description":
-    "It has seen better days. At least it has a WiFi card!"
+    """This shield looks like it has been carved by a toddler with ADHD.
+It gives me + 1 DEFENSE!"""
 }
 
 
